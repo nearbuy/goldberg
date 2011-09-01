@@ -11,6 +11,7 @@ Goldberg::Application.routes.draw do
   resources :projects, :only => 'index'
 
   get '/projects/:project_name' => 'projects#show', :as => :project
+  post '/projects/:project_name' => 'projects#create', :as => :project_create
   post '/projects/:project_name/builds' => 'projects#force', :as => :project_force
 
   get '/projects/:project_name/builds/:build_number' => 'builds#show', :as => :project_build

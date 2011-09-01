@@ -31,6 +31,17 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def create
+    Project.add(
+      :name => params[:project_name],
+      :url => params[:url],
+      :branch => params[:branch],
+      :scm => params[:scm],
+    )
+
+    redirect_to :back
+  end
+
   def index
     respond_to do |format|
       format.json { render :json => Project.all.to_json(:except => [:created_at, :modified_at], :methods => [:activity, :last_complete_build_status]) }
