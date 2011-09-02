@@ -27,4 +27,4 @@
         Build artefacts
         - @build.artefacts.each do |artefact|
           %li= link_to artefact, "/projects/#{@project.name}/builds/#{@build.number}/artefacts/#{artefact}"
-    %pre= @build.build_log
+    %pre= @build.build_log.encode(Encoding::UTF_8, Encoding::ASCII, :invalid => :replace)
