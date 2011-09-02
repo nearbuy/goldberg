@@ -29,4 +29,12 @@ class Repository
   def versioned?(file_path)
     not Command.new("cd #{@code_path} && #{@provider.version(file_path)} 2>>/dev/null || echo 'not versioned'").execute_with_output.include?('not versioned')
   end
+
+  def valid?
+    if @provider.respond_to?(:valid)
+      return Command.new("cd #{@code_path} && #{@provider.valid(@branch)}").execute == 0
+    else
+      return true
+    end
+  end
 end
