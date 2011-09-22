@@ -59,8 +59,6 @@ class Project < ActiveRecord::Base
   def run_build
     clean_up_older_builds
 
-    self.remove unless self.repository.valid?
-
     if self.repository.update || build_required?
       previous_build_status = last_complete_build_status
       prepare_for_build
